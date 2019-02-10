@@ -56,13 +56,14 @@ if __name__=="__main__":
     mypool.close()
     mypool.join()
     for res in result_multi_thread:
-        print(len(res))
-        if len(res) > 0:
-            value_list = res
+        a=res.get()
+        if len(a) > 0:
+            value_list = a
     time2 = time.time()
     print('total elapse time:' + str(time2 - time1))
 
     value_list = pd.DataFrame(value_list, columns=['value'])
     value_list.to_csv(data_folder + 'train_label.csv', index=False, header=False)
+
 
 

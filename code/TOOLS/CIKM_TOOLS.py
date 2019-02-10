@@ -6,28 +6,17 @@ import libs and commonly used functions
 @author: Marmot
 """
 
-import random
+
 import numpy as np
-import time
-from sets import Set
-import pandas as pd
 import os
-import networkx as nx
 import cv2
 from cv2 import matchTemplate as cv2m
-import networkx as nx
-import matplotlib.animation as animation
-from PIL import Image
-from itertools import islice
-import math
 from sklearn import linear_model
 from sklearn import preprocessing
-import tensorflow as tf
-from sklearn.cluster import KMeans
-from sklearn.metrics.pairwise import pairwise_distances_argmin
 
 
 def read_data(input_file,pic_ind,T_ind,H_ind):
+
     TH_ind = (T_ind-1)*4 + (H_ind - 1)
     f = open(input_file, "r")
     f.seek( ((pic_ind -1)*60 + TH_ind)*101*101, os.SEEK_SET)  # seek
