@@ -11,7 +11,7 @@ import time
 import pandas as pd
 import numpy as np
 import multiprocessing
-
+import networkx as nx
 def multi_thread_1(set_name,N_pic):
     input_file = data_folder + set_name + '_ubyte.txt'
     match_all = []
@@ -141,7 +141,7 @@ def multi_thread_1(set_name,N_pic):
         for ind in list(Pano_set_org):
             match_all_pd_start = match_all_pd_current[match_all_pd_current.pic_id1 == ind]
             for ind2, value2 in match_all_pd_start.iterrows():
-                path_mat[value2.pic_id1 - start_ind, value2.pic_id2 - start_ind] = True
+                path_mat[int(value2.pic_id1 - start_ind), int(value2.pic_id2 - start_ind)] = True
 
         # %%
 
