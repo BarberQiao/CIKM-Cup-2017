@@ -116,10 +116,10 @@ def multi_thread_1(set_name,N_pic):
         pad_ind = start_ind
         curr_ind = start_ind
 
-        Pano_set_org = Set()
+        Pano_set_org = set()
         while (1):
             match_all_pd_start = match_all_pd[match_all_pd.pic_id1 == curr_ind]
-            Pano_set_new = Set(match_all_pd_start.pic_id2.values)
+            Pano_set_new = set(match_all_pd_start.pic_id2.values)
             Pano_set_org = Pano_set_org | Pano_set_new
             try:
                 end_ind = max(list(Pano_set_org))
