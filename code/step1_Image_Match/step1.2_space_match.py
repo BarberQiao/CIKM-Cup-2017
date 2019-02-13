@@ -14,16 +14,6 @@ import multiprocessing
 
 def multi_thread_1(set_name,N_pic):
     input_file = data_folder + set_name + '_ubyte.txt'
-    block_ele = np.asarray(
-        [N_pad, (L_img - N_pad) / 4, (L_img - N_pad) / 2, (L_img - N_pad) * 3 / 4, (L_img - N_pad - 1)])
-
-    cor_row_center = np.tile(block_ele, [N_block, 1]).reshape([1, N_cor], order='F')[0]
-    cor_col_center = np.tile(block_ele, N_block)
-
-    print(block_ele)
-    print(cor_row_center)
-    print(cor_col_center)
-
     match_all = []
     # ==============================================================================
     for pic_id1 in range(1, N_pic + 1):
@@ -264,6 +254,13 @@ N_pad = 3  # Pad size of matching template
 N_block = 5  # number of blocks along each side of image
 N_cor = N_block ** 2
 data_folder = r"C:\Users\qiaos\Desktop\CIKM 2017\\"
+
+block_ele = np.asarray(
+        [N_pad, (L_img - N_pad) / 4, (L_img - N_pad) / 2, (L_img - N_pad) * 3 / 4, (L_img - N_pad - 1)])
+
+cor_row_center = np.tile(block_ele, [N_block, 1]).reshape([1, N_cor], order='F')[0]
+cor_col_center = np.tile(block_ele, N_block)
+
 
 if __name__=="__main__":
 
