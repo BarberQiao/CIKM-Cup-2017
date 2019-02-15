@@ -7,9 +7,6 @@ Spatial template matching of sub-images
 import sys
 sys.path.append('../TOOLS')
 from CIKM_TOOLS import *
-import time
-import pandas as pd
-import numpy as np
 import multiprocessing
 
 import networkx as nx

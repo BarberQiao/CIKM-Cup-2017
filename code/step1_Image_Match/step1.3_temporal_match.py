@@ -9,7 +9,7 @@ import sys
 sys.path.append('../TOOLS')
 from CIKM_TOOLS import *
 
-data_folder = '../../data/'
+data_folder = r"C:\Users\qiaos\Desktop\CIKM 2017\\"
 set_name_list = ['train','testA','testB']
 N_slice_list = [454,195,193]
 
@@ -26,13 +26,13 @@ for set_name,N_slice in zip(set_name_list,N_slice_list):
     
     for slice_id1 in range(1, N_slice+1):
         print(set_name + ' slice_ind: ' + str(slice_id1).zfill(4))
-        search_list =  range(max(1,slice_id1-2),slice_id1) + range( slice_id1+1,min((slice_id1 + 4),N_slice + 1 ) ) 
+        search_list =  list(range(max(1,slice_id1-2),slice_id1)) + list(range( slice_id1+1,min((slice_id1 + 4),N_slice + 1 ) ))
         for T_id1 in range(1,16,1):
             for H_id in range(1,5,1):
                 img1,N_row,N_col = read_slice(input_file,slice_size,slice_id1,T_id1,H_id)
                 for row_cent1 in range(N_pad,N_row -1 - N_pad,40):
                     for col_cent1 in range(N_pad,N_col -1 - N_pad,40):
-                        img_temp = img1[(row_cent1-N_pad): (row_cent1+N_pad+1), (col_cent1-N_pad): (col_cent1+N_pad+1) ]  
+                        img_temp = img1[int(row_cent1-N_pad): int(row_cent1+N_pad+1), int(col_cent1-N_pad): int(col_cent1+N_pad+1) ]
                         if (np.sum([img_temp ==200] ) == 0)&(np.sum([img_temp > 1] ) >= 0.25*N_pixel):
                             for slice_id2 in search_list:
                                 time_diff_list = [-5,0,5,10]
@@ -52,11 +52,11 @@ for set_name,N_slice in zip(set_name_list,N_slice_list):
     
     
     pd_add = pd.DataFrame(np.arange(1,N_slice+1), columns = ['slice_id1'])
-    pd_add['slice_id2'] = pd_add['slice_id1']
     pd_add['row_id1'] = 10
-    pd_add['row_id2'] = 10
-    pd_add['T_id1'] = 10
     pd_add['col_id1'] = 10
+    pd_add['T_id1'] = 10
+    pd_add['slice_id2'] = pd_add['slice_id1']
+    pd_add['row_id2'] = 10
     pd_add['col_id2'] = 10
     pd_add['T_id2'] = 10
     match_all_pd = pd.concat([match_all_pd,pd_add])
@@ -85,7 +85,7 @@ for set_name,N_slice in zip(set_name_list,N_slice_list):
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #    match_time_pd = pd.read_csv(data_folder  +set_name+'_matches_time.csv')
     if (set_name=='train'):
-        match_all_pd = match_all_pd[~((match_all_pd.slice_id1==163)&(match_all_pd.slice_id2==165))]  
+        match_all_pd = match_all_pd[~((match_all_pd.slice_id1==163)&(match_all_pd.slice_id2==165))]
     
     N_match = len(match_all_pd)
     end_ind = 0
@@ -132,7 +132,7 @@ for set_name,N_slice in zip(set_name_list,N_slice_list):
         slices = match_all_pd[ (match_all_pd.slice_id1.isin(slice_range))&(match_all_pd.slice_id2.isin(slice_range)) ]  
         path_mat = np.zeros([slice_len,slice_len]).astype(np.bool)    
         for ind2,value2 in slices.iterrows():
-            path_mat[value2.slice_id1-slice_sta, value2.slice_id2-slice_sta] = True
+            path_mat[int(value2.slice_id1-slice_sta), int(value2.slice_id2-slice_sta)] = True
         G = nx.from_numpy_matrix(path_mat)
         row_rel = []
         col_rel = []

@@ -5,7 +5,23 @@ import libs and commonly used functions
 
 @author: Marmot
 """
-
+# anaconda python2.7
+# pip install numpy==1.11.3
+# pip install opencv-python==3.1.0
+# conda install tensorflow==1.2.1
+# conda install scikit-learn==0.18.1
+# pip install networkx==1.11
+# pip install pandas==0.20.3
+#
+#
+# anaconda python2.7
+# numpy 1.13.1
+# matplotlib 2.0.2
+# opencv 3.2.0
+# scikit-learn 0.19.0
+# networkx 1.11
+# pandas 0.20.3
+# conda install tensorflow==1.2.1
 
 import numpy as np
 import os
@@ -14,6 +30,9 @@ from cv2 import matchTemplate as cv2m
 from sklearn import linear_model
 from sklearn import preprocessing
 from matplotlib import pyplot
+import time
+import pandas as pd
+import numpy as np
 
 def read_data(input_file,pic_ind,T_ind,H_ind):
 
