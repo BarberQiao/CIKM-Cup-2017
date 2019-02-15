@@ -11,6 +11,7 @@ import time
 import pandas as pd
 import numpy as np
 import multiprocessing
+
 import networkx as nx
 def multi_thread_1(set_name,N_pic):
     input_file = data_folder + set_name + '_ubyte.txt'
@@ -188,16 +189,16 @@ def multi_thread_1(set_name,N_pic):
         T_ind = 1
         H_ind = 4
 
-        view_all = (200 * np.ones([np.max(x_shift) + 51, np.max(y_shift) + 51])).astype(np.ubyte)
+        view_all = (200 * np.ones([int(np.max(x_shift) + 51), int(np.max(y_shift) + 51)])).astype(np.ubyte)
         for ind in range(len(pic_list)):
             pic_ind = pic_list[ind]
             img = read_data(input_file, pic_ind, T_ind, H_ind)  #
-            img_check = view_all[x_shift[ind] - 50:x_shift[ind] + 51, y_shift[ind] - 50:y_shift[ind] + 51]
+            img_check = view_all[int(x_shift[ind] - 50):int(x_shift[ind] + 51),int(y_shift[ind] - 50):int(y_shift[ind] + 51)]
             if (np.sum((img_check == img) | (img_check == 200)) < 10201):
                 print('fail number:' + str(pic_ind))
                 success = 0
 
-            view_all[x_shift[ind] - 50:x_shift[ind] + 51, y_shift[ind] - 50:y_shift[ind] + 51] = img
+            view_all[int(x_shift[ind] - 50):int(x_shift[ind] + 51),int( y_shift[ind] - 50):int(y_shift[ind] + 51)] = img
 
         MATCH_IND = pd.DataFrame(
             {'PIC_IND': pic_list,
@@ -225,8 +226,8 @@ def multi_thread_1(set_name,N_pic):
     for slice_ind in range(1, 1 + N_slice):
         print('slice_ind:' + str(slice_ind))
         MATCH_slice = MATCH[MATCH.SLICE_IND == slice_ind]
-        ROWS = MATCH_slice['ROW_IND'].max() + 51
-        COLS = MATCH_slice['COL_IND'].max() + 51
+        ROWS = int(MATCH_slice['ROW_IND'].max() + 51)
+        COLS = int(MATCH_slice['COL_IND'].max() + 51)
         for T_ind in range(1, 16):
             for H_ind in range(1, 5):
 
@@ -237,12 +238,12 @@ def multi_thread_1(set_name,N_pic):
                     row_ind = value.ROW_IND
                     col_ind = value.COL_IND
                     img = read_data(input_file, pic_ind, T_ind, H_ind)  #
-                    view_all[row_ind - 50:row_ind + 51, col_ind - 50:col_ind + 51] = img
+                    view_all[int(row_ind - 50):int(row_ind + 51),int( col_ind - 50):int(col_ind + 51)] = img
                 #
                 if TH_ind == 0:
                     slice_stat.append((slice_ind, view_all.shape[0], view_all.shape[1], size_all))
                     size_all = size_all + 60 * view_all.shape[0] * view_all.shape[1]
-                f = open(output_file, "a")
+                f = open(output_file, "ab")
                 f.write(view_all.tobytes())
                 f.close()
                 #
@@ -268,11 +269,14 @@ if __name__=="__main__":
     size_list = [10000, 2000, 2000]
     time1 = time.time()
 
-    mypool = multiprocessing.Pool(processes=3)
+    # mypool = multiprocessing.Pool(processes=3)
+    # for set_name, N_pic in zip(set_list, size_list):
+    #     mypool.apply_async(multi_thread_1, (set_name, N_pic))
+    # mypool.close()
+    # mypool.join()
+
     for set_name, N_pic in zip(set_list, size_list):
-        mypool.apply_async(multi_thread_1, (set_name, N_pic))
-    mypool.close()
-    mypool.join()
+         multi_thread_1 (set_name, N_pic)
 
     time2 = time.time()
     print('total elapse time:' + str(time2 - time1))
