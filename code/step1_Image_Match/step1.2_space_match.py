@@ -7,7 +7,6 @@ Spatial template matching of sub-images
 import sys
 sys.path.append('../TOOLS')
 from CIKM_TOOLS import *
-import multiprocessing
 
 import networkx as nx
 def multi_thread_1(set_name,N_pic):
@@ -266,14 +265,14 @@ if __name__=="__main__":
     size_list = [10000, 2000, 2000]
     time1 = time.time()
 
-    # mypool = multiprocessing.Pool(processes=3)
-    # for set_name, N_pic in zip(set_list, size_list):
-    #     mypool.apply_async(multi_thread_1, (set_name, N_pic))
-    # mypool.close()
-    # mypool.join()
-
+    mypool = multiprocessing.Pool(processes=3)
     for set_name, N_pic in zip(set_list, size_list):
-         multi_thread_1 (set_name, N_pic)
+        mypool.apply_async(multi_thread_1, (set_name, N_pic))
+    mypool.close()
+    mypool.join()
+
+    # for set_name, N_pic in zip(set_list, size_list):
+    #      multi_thread_1 (set_name, N_pic)
 
     time2 = time.time()
     print('total elapse time:' + str(time2 - time1))
