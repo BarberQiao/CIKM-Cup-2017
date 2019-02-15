@@ -90,9 +90,9 @@ def multi_thread_method(set_name,N_slice):
     end_ind = 0
     slice_ind = 0
     Pano = []
-    Pano_set_org = Set([1])
+    Pano_set_org = set([1])
     for ind, value in match_all_pd.iterrows():
-        Pano_set_new = Set(range(value.slice_id1, value.slice_id2 + 1))
+        Pano_set_new = set(range(value.slice_id1, value.slice_id2 + 1))
 
         if len(Pano_set_org & Pano_set_new) > 0:
             Pano_set_org = Pano_set_org | Pano_set_new
