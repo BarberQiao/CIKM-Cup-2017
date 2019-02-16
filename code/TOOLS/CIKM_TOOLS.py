@@ -7,7 +7,7 @@ import libs and commonly used functions
 """
 # anaconda python2.7
 # pip install numpy==1.11.3
-# pip install opencv-python==3.1.0 (if python  3.6: pip install opencv-contrib-python)
+# pip install opencv-python==3.1.0 (if python  3.6: pip install opencv-contrib-python==3.4.1.15)
 # conda install tensorflow==1.2.1
 # conda install scikit-learn==0.18.1
 # pip install networkx==1.11
