@@ -55,9 +55,9 @@ for set_name in set_name_list:
                 mat_src_H3 = read_sample_AB(input_file, input_size,sample_ind,T_ind_src,3)
                 mat_src_H4 = read_sample_AB(input_file, input_size,sample_ind,T_ind_src,4) 
             
-            mat_src_H2_pad = mat_src_H2[row_id_src_H2-N_pad:row_id_src_H2+N_pad +1,col_id_src_H2-N_pad:col_id_src_H2 +N_pad+1]  
-            mat_src_H3_pad = mat_src_H3[row_id_src_H3-N_pad:row_id_src_H3+N_pad +1,col_id_src_H3-N_pad:col_id_src_H3 +N_pad+1] 
-            mat_src_H4_pad = mat_src_H4[row_id_src_H4-N_pad:row_id_src_H4+N_pad +1,col_id_src_H4-N_pad:col_id_src_H4 +N_pad+1] 
+            mat_src_H2_pad = mat_src_H2[int(row_id_src_H2-N_pad):int(row_id_src_H2+N_pad +1),int(col_id_src_H2-N_pad):int(col_id_src_H2 +N_pad+1)]
+            mat_src_H3_pad = mat_src_H3[int(row_id_src_H3-N_pad):int(row_id_src_H3+N_pad +1),int(col_id_src_H3-N_pad):int(col_id_src_H3 +N_pad+1)]
+            mat_src_H4_pad = mat_src_H4[int(row_id_src_H4-N_pad):int(row_id_src_H4+N_pad +1),int(col_id_src_H4-N_pad):int(col_id_src_H4 +N_pad+1)]
             
             good_values_src_H2 = np.sum(mat_src_H2_pad!=200)  
             size_src_H2 = np.size(mat_src_H2_pad)
