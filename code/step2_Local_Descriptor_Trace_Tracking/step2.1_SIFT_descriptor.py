@@ -10,7 +10,6 @@ sys.path.append('../TOOLS')
 from CIKM_TOOLS import *
 
 
-data_folder = '../../data/'
 set_name_list = ['train','testAB']
 fast = cv2.FastFeatureDetector_create()
 sift = cv2.xfeatures2d.SIFT_create()
