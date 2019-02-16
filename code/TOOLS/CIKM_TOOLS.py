@@ -23,6 +23,8 @@ import libs and commonly used functions
 # pandas 0.20.3
 # conda install tensorflow==1.2.1
 
+data_folder = r"C:\Users\qiaos\Desktop\CIKM 2017\\"
+
 import numpy as np
 import os
 import cv2

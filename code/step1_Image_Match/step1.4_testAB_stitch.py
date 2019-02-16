@@ -9,9 +9,6 @@ import sys
 sys.path.append('../TOOLS')
 from CIKM_TOOLS import *
 
-
-data_folder = '../../data/'
-
 testB = 'testB'
 testB_N_slice = 193
 testB_slice_size = pd.read_csv(data_folder + testB + '_slice_size.csv')
@@ -29,7 +26,7 @@ match_all = []
 N_match = 0
 for slice_id1 in range(1, testA_N_slice+1):
     print('testAB matching: slice id:'+ str(slice_id1).zfill(4))
-    search_list =  range(max(slice_id1-7,1) ,min((slice_id1 + 7),testB_N_slice +1  ) ) 
+    search_list = list(range(max(slice_id1-7,1) ,min((slice_id1 + 7),testB_N_slice +1  ) ) )
     for T_id1 in range(1,16):
         for H_id in range(1,5):
         
@@ -134,8 +131,8 @@ for sam_id in range(1,1+testB_MATCH.SAM_ID.max()):
         COL_MAX = np.max( [SAMSB['testB_col_end'].max(), SAMSA['testA_col_end_new'].max()] )
         TIME_MAX = np.max( [SAMSA['TIM_MAX'].max(), SAMSB['TIM_MAX'].max()] )
 
-        ROW_SIZE = ROW_MAX - ROW_MIN + 1
-        COL_SIZE = COL_MAX - COL_MIN + 1
+        ROW_SIZE = int(ROW_MAX - ROW_MIN + 1)
+        COL_SIZE = int(COL_MAX - COL_MIN + 1)
         
         ROW_SHIFT_A = ROW_SHIFT - ROW_MIN
         ROW_SHIFT_B = 0 - ROW_MIN
