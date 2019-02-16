@@ -242,7 +242,7 @@ def multi_thread_method(set_name,N_slice):
                 if TH_ind == 0:
                     sample_stat.append((sam_id, ROW_size, COL_size, TIME_MAX, size_all))
                     size_all = size_all + 4 * TIME_MAX * ROW_size * COL_size
-                f = open(output_file, "a")
+                f = open(output_file, "ab")
                 f.write(view_all.tobytes())
                 f.close()
                 #
@@ -257,17 +257,18 @@ N_pixel = (N_pad * 2 + 1) ** 2
 if __name__=="__main__":
     time1 = time.time()
 
-    set_name_list = ['train', 'testA', 'testB']
-    N_slice_list = [454, 195, 193]
+    # set_name_list = ['train', 'testA', 'testB']
+    # N_slice_list = [454, 195, 193]
 
     # mypool = multiprocessing.Pool(processes=3)
     # for set_name, N_slice in zip(set_name_list, N_slice_list):
     #     mypool.apply_async(multi_thread_method, (set_name, N_slice))
     # mypool.close()
     # mypool.join()
-
+    set_name_list = [ 'testA']
+    N_slice_list = [195]
     for set_name, N_slice in zip(set_name_list, N_slice_list):
-        multi_thread_method (set_name, N_slice)
+        multi_thread_method(set_name, N_slice)
 
     time2 = time.time()
     print('total elapse time:' + str(time2 - time1))
