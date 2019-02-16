@@ -5,8 +5,8 @@ Spatial template matching of sub-images
 @author: Marmot
 """
 import sys
-sys.path.append('../TOOLS')
-from CIKM_TOOLS import *
+sys.path.append("..")
+from TOOLS.CIKM_TOOLS import *
 
 
 def multi_thread_1(set_name,N_pic):

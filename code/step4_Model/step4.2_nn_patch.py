@@ -6,8 +6,8 @@ Neural net training for samples without tracked local image
 """
 
 import sys
-sys.path.append('../TOOLS')
-from CIKM_TOOLS import *
+sys.path.append("..")
+from TOOLS.CIKM_TOOLS import *
 
     
 trn_patch = np.load(data_folder + 'train' + '_patch.npy')

@@ -6,8 +6,8 @@ Stitch images by cross-search among testA and testB set
 """
 
 import sys
-sys.path.append('../TOOLS')
-from CIKM_TOOLS import *
+sys.path.append("..")
+from TOOLS.CIKM_TOOLS import *
 
 testB = 'testB'
 testB_N_slice = 193

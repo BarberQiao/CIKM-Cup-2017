@@ -6,8 +6,8 @@ Convolutional neural network training
 """
 
 import sys
-sys.path.append('../TOOLS')
-from CIKM_TOOLS import *
+sys.path.append("..")
+from TOOLS.CIKM_TOOLS import *
 
 import tensorflow as tf
 import numpy as np

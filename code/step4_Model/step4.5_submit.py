@@ -6,8 +6,8 @@ Model ensemble and submit
 """
 
 import sys
-sys.path.append('../TOOLS')
-from CIKM_TOOLS import *
+sys.path.append("..")
+from TOOLS.CIKM_TOOLS import *
 
 cnn = pd.read_csv(data_folder + 'result_cnn.csv')
 nn = pd.read_csv(data_folder + 'result_nn.csv')

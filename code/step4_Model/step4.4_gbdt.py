@@ -6,8 +6,8 @@ GBDT model
 """
 
 import sys
-sys.path.append('../TOOLS')
-from CIKM_TOOLS import *
+sys.path.append("..")
+from TOOLS.CIKM_TOOLS import *
 from sklearn import linear_model
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn import svm

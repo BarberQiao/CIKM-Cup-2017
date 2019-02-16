@@ -7,10 +7,11 @@ of the extrapolation time stamp.
 """
 
 import sys
-sys.path.append('../TOOLS')
-from CIKM_TOOLS import *
+sys.path.append("..")
+from TOOLS.CIKM_TOOLS import *
 
 set_name_list = ['train','testAB']
+
 for set_name in set_name_list:
     N_pad = 20
     N_len = 2*N_pad + 1

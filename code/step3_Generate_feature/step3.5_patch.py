@@ -6,8 +6,8 @@ Package features for neural network model and save as numpy array
 """
 
 import sys
-sys.path.append('../TOOLS')
-from CIKM_TOOLS import *
+sys.path.append("..")
+from TOOLS.CIKM_TOOLS import *
 
 set_name_list = ['train','testAB']
 for set_name in set_name_list:

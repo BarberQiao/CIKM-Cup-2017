@@ -6,8 +6,8 @@ Generate global description of the cloud pattern
 """
 
 import sys
-sys.path.append('../TOOLS')
-from CIKM_TOOLS import *
+sys.path.append("..")
+from TOOLS.CIKM_TOOLS import *
 
 set_name_list = ['train','testAB']
 
