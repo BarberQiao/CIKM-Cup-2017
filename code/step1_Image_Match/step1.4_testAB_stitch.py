@@ -22,7 +22,7 @@ testA_input_file = data_folder + testA + '_slice_data'
 N_pad = 4
 N_pixel = (N_pad*2+1)**2
 
-if check_file_exist(data_folder + 'testAB_SLICE_MATCH.csv'):
+if not check_file_exist(data_folder + 'testAB_SLICE_MATCH.csv'):
     match_all = []
     N_match = 0
     for slice_id1 in range(1, testA_N_slice + 1):
