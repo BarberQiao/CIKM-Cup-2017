@@ -9,9 +9,6 @@ import sys
 sys.path.append('../TOOLS')
 from CIKM_TOOLS import *
 
-
-data_folder = '../../data/'
-
 cnn = pd.read_csv(data_folder + 'result_cnn.csv')
 nn = pd.read_csv(data_folder + 'result_nn.csv')
 gbdt = pd.read_csv(data_folder + 'result_gbdt.csv')

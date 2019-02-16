@@ -12,8 +12,6 @@ from CIKM_TOOLS import *
 import tensorflow as tf
 import numpy as np
 import pandas as pd
-
-data_folder = '../../data/'
     
 trn_flat = np.load(data_folder + 'train' + '_flat.npy')
 tst_flat = np.load(data_folder + 'testAB' + '_flat.npy')

@@ -8,7 +8,6 @@ Package features in step3.2 and step3.3 and save as numpy array
 import sys
 sys.path.append('../TOOLS')
 from CIKM_TOOLS import *
-data_folder = '../../data/'
 
 set_name_list = ['train', 'testAB']
 

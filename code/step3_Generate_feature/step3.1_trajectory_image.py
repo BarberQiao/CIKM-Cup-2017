@@ -9,7 +9,6 @@ of the extrapolation time stamp.
 import sys
 sys.path.append('../TOOLS')
 from CIKM_TOOLS import *
-data_folder = '../../data/'
 
 set_name_list = ['train','testAB']
 for set_name in set_name_list:

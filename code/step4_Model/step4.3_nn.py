@@ -9,8 +9,6 @@ import sys
 sys.path.append('../TOOLS')
 from CIKM_TOOLS import *
 
-
-data_folder = '../../data/'
     
 #trn_patch = np.load(data_folder + 'train' + '_patch.npy')
 #tst_patch = np.load(data_folder + 'testAB' + '_patch.npy')

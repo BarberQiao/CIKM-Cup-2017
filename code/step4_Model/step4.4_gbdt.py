@@ -13,8 +13,6 @@ from sklearn.ensemble import GradientBoostingRegressor
 from sklearn import svm
 model = GradientBoostingRegressor(n_estimators=200, learning_rate=0.03,max_depth=1, random_state=0)
 
-data_folder = '../../data/'
-
 #%%    
 trn_patch = np.load(data_folder + 'train' + '_patch.npy')
 tst_patch = np.load(data_folder + 'testAB' + '_patch.npy')
