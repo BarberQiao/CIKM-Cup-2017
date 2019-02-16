@@ -61,7 +61,7 @@ k_means_cluster_centers = np.sort(k_means.cluster_centers_, axis=0)
 
 #%% 
 
-kp_name = map(lambda x:'kp'+ str(x).zfill(2), np.arange(1,N_centroids+1))
+kp_name = list(map(lambda x:'kp'+ str(x).zfill(2), np.arange(1,N_centroids+1)))
 hist_bin = np.arange(-0.5,N_centroids+0.5)
 
 
@@ -94,7 +94,7 @@ for set_name in set_name_list:
             for i,kp_name_ind in enumerate(kp_name):
                 pic_sample.loc[ind2,kp_name_ind] = des_hist[i]
 
-    pic_sample[['PIC_IND'] + list(kp_name) ].to_csv(data_folder + set_name + '_sift_vector.csv',index = False)
+    pic_sample[['PIC_IND'] + kp_name ].to_csv(data_folder + set_name + '_sift_vector.csv',index = False)
 
 #train_label = pd.read_csv(data_folder  + 'train_label.csv',names= ['value'])
 #train_label['PIC_IND'] = train_label.index + 1
