@@ -255,18 +255,14 @@ N_pixel = (N_pad * 2 + 1) ** 2
 if __name__=="__main__":
     time1 = time.time()
 
-    # set_name_list = ['train', 'testA', 'testB']
-    # N_slice_list = [454, 195, 193]
+    set_name_list = ['train', 'testA', 'testB']
+    N_slice_list = [454, 195, 193]
 
-    # mypool = multiprocessing.Pool(processes=3)
-    # for set_name, N_slice in zip(set_name_list, N_slice_list):
-    #     mypool.apply_async(multi_thread_method, (set_name, N_slice))
-    # mypool.close()
-    # mypool.join()
-    set_name_list = [ 'testA']
-    N_slice_list = [195]
+    mypool = multiprocessing.Pool(processes=3)
     for set_name, N_slice in zip(set_name_list, N_slice_list):
-        multi_thread_method(set_name, N_slice)
+        mypool.apply_async(multi_thread_method, (set_name, N_slice))
+    mypool.close()
+    mypool.join()
 
     time2 = time.time()
     print('total elapse time:' + str(time2 - time1))

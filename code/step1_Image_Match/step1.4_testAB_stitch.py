@@ -21,39 +21,45 @@ testA_input_file = data_folder + testA + '_slice_data'
 
 N_pad = 4
 N_pixel = (N_pad*2+1)**2
-     
-match_all = []
-N_match = 0
-for slice_id1 in range(1, testA_N_slice+1):
-    print('testAB matching: slice id:'+ str(slice_id1).zfill(4))
-    search_list = list(range(max(slice_id1-7,1) ,min((slice_id1 + 7),testB_N_slice +1  ) ) )
-    for T_id1 in range(1,16):
-        for H_id in range(1,5):
-        
-            img1,N_row,N_col = read_slice( testA_input_file ,testA_slice_size, slice_id1,T_id1,H_id)
-            for row_cent1 in range(N_pad,N_row -1 - N_pad,30):
-                for col_cent1 in range(N_pad,N_col -1 - N_pad,30):
-        
-                    img_temp = img1[int(row_cent1-N_pad): int(row_cent1+N_pad+1), int(col_cent1-N_pad): int(col_cent1+N_pad+1) ]
-                    
-                    if (np.sum([img_temp ==200] ) == 0)&(np.sum([img_temp > 1] ) >= 0.2*N_pixel):
-                        for slice_id2 in search_list:
-                            T_id2 = T_id1 
-                            img2,N_row,N_col = read_slice(testB_input_file ,testB_slice_size,slice_id2,T_id2,H_id)
-                            match_result = cv2_based(img2,img_temp)
-                            if len(match_result[0])==1:
-                                search_list.remove(slice_id2)
-                                row_cent2 = match_result[0][0]+ N_pad
-                                col_cent2 = match_result[1][0]+ N_pad
-                                match_all.append( (slice_id1, row_cent1, col_cent1,T_id1, slice_id2 , row_cent2, col_cent2,T_id2) )
-                                N_match = N_match + 1
-                    
-                    
-match_all_pd = pd.DataFrame(match_all)
-match_all_pd.columns = ['testA_SLI_ID','testA_ROW_ID','testA_COL_ID','testA_TIM_ID','testB_SLI_ID','testB_ROW_ID','testB_COL_ID','testB_TIM_ID']
-match_all_pd = match_all_pd[['testA_SLI_ID','testA_ROW_ID','testA_COL_ID','testB_SLI_ID','testB_ROW_ID','testB_COL_ID']]
 
-match_all_pd.to_csv(data_folder + 'testAB_SLICE_MATCH.csv',index = False)
+if check_file_exist(data_folder + 'testAB_SLICE_MATCH.csv'):
+    match_all = []
+    N_match = 0
+    for slice_id1 in range(1, testA_N_slice + 1):
+        print('testAB matching: slice id:' + str(slice_id1).zfill(4))
+        search_list = list(range(max(slice_id1 - 7, 1), min((slice_id1 + 7), testB_N_slice + 1)))
+        for T_id1 in range(1, 16):
+            for H_id in range(1, 5):
+
+                img1, N_row, N_col = read_slice(testA_input_file, testA_slice_size, slice_id1, T_id1, H_id)
+                for row_cent1 in range(N_pad, N_row - 1 - N_pad, 30):
+                    for col_cent1 in range(N_pad, N_col - 1 - N_pad, 30):
+
+                        img_temp = img1[int(row_cent1 - N_pad): int(row_cent1 + N_pad + 1),
+                                   int(col_cent1 - N_pad): int(col_cent1 + N_pad + 1)]
+
+                        if (np.sum([img_temp == 200]) == 0) & (np.sum([img_temp > 1]) >= 0.2 * N_pixel):
+                            for slice_id2 in search_list:
+                                T_id2 = T_id1
+                                img2, N_row, N_col = read_slice(testB_input_file, testB_slice_size, slice_id2, T_id2,
+                                                                H_id)
+                                match_result = cv2_based(img2, img_temp)
+                                if len(match_result[0]) == 1:
+                                    search_list.remove(slice_id2)
+                                    row_cent2 = match_result[0][0] + N_pad
+                                    col_cent2 = match_result[1][0] + N_pad
+                                    match_all.append((slice_id1, row_cent1, col_cent1, T_id1, slice_id2, row_cent2,
+                                                      col_cent2, T_id2))
+                                    N_match = N_match + 1
+
+    match_all_pd = pd.DataFrame(match_all)
+    match_all_pd.columns = ['testA_SLI_ID', 'testA_ROW_ID', 'testA_COL_ID', 'testA_TIM_ID', 'testB_SLI_ID',
+                            'testB_ROW_ID', 'testB_COL_ID', 'testB_TIM_ID']
+    match_all_pd = match_all_pd[
+        ['testA_SLI_ID', 'testA_ROW_ID', 'testA_COL_ID', 'testB_SLI_ID', 'testB_ROW_ID', 'testB_COL_ID']]
+
+    match_all_pd.to_csv(data_folder + 'testAB_SLICE_MATCH.csv', index=False)
+
 
 testA_slice_size = pd.read_csv(data_folder + 'testA_slice_size.csv')
 testB_slice_size = pd.read_csv(data_folder + 'testB_slice_size.csv')
@@ -154,7 +160,7 @@ for sam_id in range(1,1+testB_MATCH.SAM_ID.max()):
                     if ((T_id>=1)&(T_id<=15)):                  
                         data_mat,row,col = read_slice(testB_input_file,testB_slice_size,slice_id,T_id,H_id)
                         useful_place = np.where(data_mat!=200)
-                        view_all[int(ROW_SHIFT_B+ useful_place[0] + row_id),int(COL_SHIFT_B +  useful_place[1] + col_id)] = data_mat[useful_place]
+                        view_all[(ROW_SHIFT_B+ useful_place[0] + row_id),(COL_SHIFT_B +  useful_place[1] + col_id)] = data_mat[useful_place]
                 if TH_ind ==0:  
                     sample_stat.append((SAMSA.SAM_ID.values[0], SAMSB.SAM_ID.values[0], ROW_SIZE,COL_SIZE,TIME_MAX,size_all,ROW_SHIFT_A,COL_SHIFT_A,ROW_SHIFT_B,COL_SHIFT_B))
                     size_all = size_all + 4*TIME_MAX*ROW_SIZE*COL_SIZE
@@ -167,7 +173,7 @@ for sam_id in range(1,1+testB_MATCH.SAM_ID.max()):
                     if ((T_id>=1)&(T_id<=15)):                  
                         data_mat,row,col = read_slice(testA_input_file,testA_slice_size,slice_id,T_id,H_id)
                         useful_place = np.where(data_mat!=200)
-                        view_all[int(ROW_SHIFT_A + useful_place[0] + row_id),int(COL_SHIFT_A +  useful_place[1] + col_id)] = data_mat[useful_place]
+                        view_all[(ROW_SHIFT_A + useful_place[0] + row_id),(COL_SHIFT_A +  useful_place[1] + col_id)] = data_mat[useful_place]
 
 
                 f = open(output_file, "ab")
@@ -192,7 +198,7 @@ for sam_id in range(1,1+testB_MATCH.SAM_ID.max()):
                     if ((T_id>=1)&(T_id<=15)):                  
                         data_mat,row,col = read_slice(testB_input_file,testB_slice_size,slice_id,T_id,H_id)
                         useful_place = np.where(data_mat!=200)
-                        view_all[ int(useful_place[0] + row_id), int(useful_place[1] + col_id)] = data_mat[useful_place]
+                        view_all[ (useful_place[0] + row_id), (useful_place[1] + col_id)] = data_mat[useful_place]
                 if TH_ind ==0:  
                     sample_stat.append((0, SAMSB.SAM_ID.values[0], ROW_SIZE,COL_SIZE,TIME_MAX,size_all,0,0,0,0))
                     size_all = size_all + 4*TIME_MAX*ROW_SIZE*COL_SIZE                        

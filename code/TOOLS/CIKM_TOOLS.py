@@ -287,6 +287,20 @@ def lr_model(train_pic_sample,feature_list):
     print('train mean pred:' + str(np.mean(y_pred)) )
     print('train mse:' + str(np.std(y_true - y_pred) ) )
 
+def variable_info(object):
+    if type(object)==np.ndarray:
+        print(type(object),object.shape)
+    elif type(object)==tuple or type(object)==list:
+        print(type(object),len(object))
+    else:
+        print(type(object))
+
+def check_file_exist(file_path):
+    if os.path.exists(file_path):
+        return True
+    else:
+        return False
+
 if __name__=="__main__":
     H_id_count = 4
     T_id_count = 15
