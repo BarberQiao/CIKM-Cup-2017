@@ -29,11 +29,11 @@ for set_name in set_name_list:
     SAM_INFO = pic_sample[['SAM_ID','TIM_ID','PIC_IND']].groupby(['SAM_ID','TIM_ID'],as_index = False).count()
     SAM_INFO = SAM_INFO.rename(columns = {'PIC_IND':'N_sli'}) 
     time_list = np.arange(11,16)
-    cover_ = map(lambda x:'COV'+ str(x).zfill(2), time_list) 
-    mean_ = map(lambda x:'MEA'+ str(x).zfill(2), time_list) 
-    std_ = map(lambda x:'STD'+ str(x).zfill(2), time_list) 
-    max_ = map(lambda x:'MAX'+ str(x).zfill(2), time_list) 
-    
+    cover_ = list(map(lambda x:'COV'+ str(x).zfill(2), time_list))
+    mean_ = list(map(lambda x:'MEA'+ str(x).zfill(2), time_list))
+    std_ = list(map(lambda x:'STD'+ str(x).zfill(2), time_list))
+    max_ = list(map(lambda x:'MAX'+ str(x).zfill(2), time_list))
+
     item_zip = zip(time_list,cover_, mean_,std_,max_)
     for ind,value in SAM_INFO.iterrows():  
         for t_id,cover_item,mean_item,std_item,max_item in item_zip:   
@@ -52,10 +52,10 @@ for set_name in set_name_list:
     
     #%% time diff
     time_diff_list = np.asarray([2,4])
-    cover_diff_ = map(lambda x:'COV_DIFF'+ str(x).zfill(2), time_diff_list) 
-    mean_diff_ = map(lambda x:'MEA_DIFF'+ str(x).zfill(2), time_diff_list) 
-    std_diff_ = map(lambda x:'STD_DIFF'+ str(x).zfill(2), time_diff_list) 
-    max_diff_ = map(lambda x:'MAX_DIFF'+ str(x).zfill(2), time_diff_list)   
+    cover_diff_ = list(map(lambda x:'COV_DIFF'+ str(x).zfill(2), time_diff_list) )
+    mean_diff_ = list(map(lambda x:'MEA_DIFF'+ str(x).zfill(2), time_diff_list) )
+    std_diff_ = list(map(lambda x:'STD_DIFF'+ str(x).zfill(2), time_diff_list) )
+    max_diff_ = list(map(lambda x:'MAX_DIFF'+ str(x).zfill(2), time_diff_list)  )
     
     item_zip = zip(time_diff_list,cover_diff_,mean_diff_,std_diff_,max_diff_)
     for t_id, cover_item, mean_item,std_item,max_item in item_zip:
@@ -66,10 +66,10 @@ for set_name in set_name_list:
     
     #%% height diff
     height_diff_list = np.asarray([3,4])
-    cover_diff_H = map(lambda x:'COV_DIFF_H'+ str(x).zfill(2), height_diff_list) 
-    mean_diff_H = map(lambda x:'MEA_DIFF_H'+ str(x).zfill(2), height_diff_list) 
-    std_diff_H = map(lambda x:'STD_DIFF_H'+ str(x).zfill(2), height_diff_list) 
-    max_diff_H = map(lambda x:'MAX_DIFF_H'+ str(x).zfill(2), height_diff_list)     
+    cover_diff_H = list(map(lambda x:'COV_DIFF_H'+ str(x).zfill(2), height_diff_list) )
+    mean_diff_H = list(map(lambda x:'MEA_DIFF_H'+ str(x).zfill(2), height_diff_list) )
+    std_diff_H = list(map(lambda x:'STD_DIFF_H'+ str(x).zfill(2), height_diff_list) )
+    max_diff_H = list(map(lambda x:'MAX_DIFF_H'+ str(x).zfill(2), height_diff_list)  )
     
     item_zip = zip(height_diff_list, cover_diff_H,mean_diff_H ,std_diff_H ,max_diff_H)
     SAM_INFO = pic_sample[['SAM_ID','TIM_ID','PIC_IND']].groupby(['SAM_ID','TIM_ID'],as_index = False).count()
@@ -100,20 +100,20 @@ for set_name in set_name_list:
     
 #%%
     time_diff_list = np.asarray([2,4])
-    cover_diff_ = map(lambda x:'COV_DIFF'+ str(x).zfill(2), time_diff_list) 
-    mean_diff_ = map(lambda x:'MEA_DIFF'+ str(x).zfill(2), time_diff_list) 
-    std_diff_ = map(lambda x:'STD_DIFF'+ str(x).zfill(2), time_diff_list) 
-    max_diff_ = map(lambda x:'MAX_DIFF'+ str(x).zfill(2), time_diff_list)
+    cover_diff_ =list( map(lambda x:'COV_DIFF'+ str(x).zfill(2), time_diff_list) )
+    mean_diff_ = list(map(lambda x:'MEA_DIFF'+ str(x).zfill(2), time_diff_list) )
+    std_diff_ =list( map(lambda x:'STD_DIFF'+ str(x).zfill(2), time_diff_list) )
+    max_diff_ = list(map(lambda x:'MAX_DIFF'+ str(x).zfill(2), time_diff_list))
     height_diff_list = np.asarray([3,4])
-    cover_diff_H = map(lambda x:'COV_DIFF_H'+ str(x).zfill(2), height_diff_list) 
-    mean_diff_H = map(lambda x:'MEA_DIFF_H'+ str(x).zfill(2), height_diff_list) 
-    std_diff_H = map(lambda x:'STD_DIFF_H'+ str(x).zfill(2), height_diff_list) 
-    max_diff_H = map(lambda x:'MAX_DIFF_H'+ str(x).zfill(2), height_diff_list) 
+    cover_diff_H = list(map(lambda x:'COV_DIFF_H'+ str(x).zfill(2), height_diff_list) )
+    mean_diff_H =list( map(lambda x:'MEA_DIFF_H'+ str(x).zfill(2), height_diff_list) )
+    std_diff_H =list( map(lambda x:'STD_DIFF_H'+ str(x).zfill(2), height_diff_list) )
+    max_diff_H = list(map(lambda x:'MAX_DIFF_H'+ str(x).zfill(2), height_diff_list) )
     time_list = np.asarray([11,15])
-    cover_ = map(lambda x:'COV'+ str(x).zfill(2), time_list) 
-    mean_ = map(lambda x:'MEA'+ str(x).zfill(2), time_list) 
-    std_ = map(lambda x:'STD'+ str(x).zfill(2), time_list) 
-    max_ = map(lambda x:'MAX'+ str(x).zfill(2), time_list) 
+    cover_ = list(map(lambda x:'COV'+ str(x).zfill(2), time_list) )
+    mean_ = list(map(lambda x:'MEA'+ str(x).zfill(2), time_list) )
+    std_ =list( map(lambda x:'STD'+ str(x).zfill(2), time_list) )
+    max_ = list(map(lambda x:'MAX'+ str(x).zfill(2), time_list) )
     
     TS_ = cover_diff_ + mean_diff_ + std_diff_ + max_diff_ + cover_diff_H + mean_diff_H + std_diff_H + max_diff_H + cover_ + mean_ + std_ + max_
     pic_sample = pic_sample[['PIC_IND'] + TS_]

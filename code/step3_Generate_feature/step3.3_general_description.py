@@ -24,7 +24,7 @@ for set_name in set_name_list:
         
     #%%  Velocity and accelation vector
         
-    velo_ = map(lambda x:'V'+ str(x).zfill(2), np.arange(1,9))
+    velo_ = list(map(lambda x:'V'+ str(x).zfill(2), np.arange(1,9)))
     serie_ = np.arange(14).reshape([14,-1])
     trace_H2 = np.load(data_folder + set_name +'_trace_H2.npy').item()
     model = linear_model.LinearRegression(n_jobs= 4)
@@ -46,7 +46,7 @@ for set_name in set_name_list:
     
 
     #%% coordinate
-    coord_ = map(lambda x:'C'+ str(x).zfill(2), np.arange(1,9))
+    coord_ = list(map(lambda x:'C'+ str(x).zfill(2), np.arange(1,9)))
     
     pic_sample['C01'] = pic_sample['ROW_ID2']/pic_sample['ROW_MAX']
     pic_sample['C02'] = pic_sample['COL_ID2']/pic_sample['COL_MAX']
@@ -59,12 +59,12 @@ for set_name in set_name_list:
 
     #%% histgram of SIFT descriptor classes
     N_centroids = 8
-    kp_ = map(lambda x:'kp'+ str(x).zfill(2), np.arange(1,N_centroids+1)) 
+    kp_ = list(map(lambda x:'kp'+ str(x).zfill(2), np.arange(1,N_centroids+1)) )
     kp_feature = pd.read_csv(data_folder + set_name + '_sift_vector.csv')
     pic_sample = pd.merge(pic_sample, kp_feature, on = 'PIC_IND', how = 'left')
     
     #%% historical info
-    hist_ = map(lambda x:'H'+ str(x).zfill(2), np.arange(1,4))
+    hist_ = list(map(lambda x:'H'+ str(x).zfill(2), np.arange(1,4)))
     pic_sample['H01'] = pic_sample['TIM_ID']
     # T02 whether appear or disappear
     SAM_INFO = pic_sample[['SAM_ID','TIM_ID','PIC_IND']].groupby(['SAM_ID','TIM_ID'],as_index = False).count()
@@ -124,7 +124,7 @@ for set_name in set_name_list:
         break_point.append(200)
     
       
-    bin_ = map(lambda x:'B'+ str(x).zfill(2), np.arange(1,8))   
+    bin_ =list( map(lambda x:'B'+ str(x).zfill(2), np.arange(1,8)))
     SAM_INFO = pic_sample[['SAM_ID','TIM_ID','PIC_IND']].groupby(['SAM_ID','TIM_ID'],as_index = False).count()
     SAM_INFO = SAM_INFO.rename(columns = {'PIC_IND':'N_sli'}) 
     trace_H2 = np.load(data_folder + set_name + '_trace_H2.npy').item()
@@ -203,7 +203,7 @@ for set_name in set_name_list:
     SAM_INFO = SAM_INFO.rename(columns = {'PIC_IND':'N_sli'})
     N_dist = 10
     Dist_list = (np.e-1)**np.arange(1,N_dist)
-    N_ = map(lambda x:'N'+ str(x).zfill(2), np.arange(1,N_dist )) 
+    N_ = list(map(lambda x:'N'+ str(x).zfill(2), np.arange(1,N_dist )) )
 #    NP_ = map(lambda x:'NP'+ str(x).zfill(2), np.arange(1,N_num )) 
     dist_zip = zip(Dist_list,N_)
     for ind,value in SAM_INFO.iterrows():
@@ -222,18 +222,18 @@ for set_name in set_name_list:
     pic_sample = pd.merge(pic_sample,pic_sample_temp , on = ['PIC_IND'])    
         
     #%%
-    velo_ = map(lambda x:'V'+ str(x).zfill(2), np.arange(1,7))
-    coord_ = map(lambda x:'C'+ str(x).zfill(2), np.arange(1,6))
+    velo_ = list(map(lambda x:'V'+ str(x).zfill(2), np.arange(1,7)))
+    coord_ =list( map(lambda x:'C'+ str(x).zfill(2), np.arange(1,6)))
     N_centroids = 8
-    kp_ = map(lambda x:'kp'+ str(x).zfill(2), np.arange(1,N_centroids+1)) 
-    hist_ = map(lambda x:'H'+ str(x).zfill(2), np.arange(1,4))
+    kp_ =list( map(lambda x:'kp'+ str(x).zfill(2), np.arange(1,N_centroids+1)) )
+    hist_ = list(map(lambda x:'H'+ str(x).zfill(2), np.arange(1,4)))
     
-    bin_ = map(lambda x:'B'+ str(x).zfill(2), np.arange(1,8))  
-    M_ = map(lambda x:'M'+ str(x).zfill(2), np.arange(1,4)) 
-    R_ = map(lambda x:'R'+ str(x).zfill(2), np.arange(1,3)) 
+    bin_ =list( map(lambda x:'B'+ str(x).zfill(2), np.arange(1,8))  )
+    M_ =list( map(lambda x:'M'+ str(x).zfill(2), np.arange(1,4)) )
+    R_ =list( map(lambda x:'R'+ str(x).zfill(2), np.arange(1,3)) )
         
     N_dist = 10
-    N_ = map(lambda x:'N'+ str(x).zfill(2), np.arange(1,N_dist )) 
+    N_ = list(map(lambda x:'N'+ str(x).zfill(2), np.arange(1,N_dist )) )
 
     
     pic_sample = pic_sample[['PIC_IND'] + velo_ + coord_ + kp_ +hist_ + bin_ + M_ + R_ + N_ ]
