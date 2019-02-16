@@ -93,8 +93,8 @@ for set_name in set_name_list:
         for ind2,value2 in sli_info.iterrows():  
             for i,kp_name_ind in enumerate(kp_name):
                 pic_sample.loc[ind2,kp_name_ind] = des_hist[i]
-    
-    pic_sample[['PIC_IND'] + kp_name].to_csv(data_folder + set_name + '_sift_vector.csv',index = False)
+
+    pic_sample[['PIC_IND'] + list(kp_name) ].to_csv(data_folder + set_name + '_sift_vector.csv',index = False)
 
 #train_label = pd.read_csv(data_folder  + 'train_label.csv',names= ['value'])
 #train_label['PIC_IND'] = train_label.index + 1

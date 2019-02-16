@@ -37,6 +37,17 @@ import pandas as pd
 import numpy as np
 import multiprocessing
 import networkx as nx
+import random
+try:
+    from sets import Set
+except:
+    Set=set
+import matplotlib.animation as animation
+from PIL import Image
+from itertools import islice
+import math
+from sklearn.cluster import KMeans
+from sklearn.metrics.pairwise import pairwise_distances_argmin
 
 def read_data(input_file,pic_ind,T_ind,H_ind):
 
