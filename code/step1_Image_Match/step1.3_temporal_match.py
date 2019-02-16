@@ -9,8 +9,6 @@ import sys
 sys.path.append('../TOOLS')
 from CIKM_TOOLS import *
 
-
-
 def multi_thread_method(set_name,N_slice):
     slice_size = pd.read_csv(data_folder + set_name + '_slice_size.csv')
     input_file = data_folder + set_name + '_slice_data'

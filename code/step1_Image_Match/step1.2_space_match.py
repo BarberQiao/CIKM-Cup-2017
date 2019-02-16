@@ -8,7 +8,7 @@ import sys
 sys.path.append('../TOOLS')
 from CIKM_TOOLS import *
 
-import networkx as nx
+
 def multi_thread_1(set_name,N_pic):
     input_file = data_folder + set_name + '_ubyte.txt'
     match_all = []

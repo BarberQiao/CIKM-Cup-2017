@@ -37,7 +37,7 @@ for slice_id1 in range(1, testA_N_slice+1):
             for row_cent1 in range(N_pad,N_row -1 - N_pad,30):
                 for col_cent1 in range(N_pad,N_col -1 - N_pad,30):
         
-                    img_temp = img1[(row_cent1-N_pad): (row_cent1+N_pad+1), (col_cent1-N_pad): (col_cent1+N_pad+1) ]
+                    img_temp = img1[int(row_cent1-N_pad): int(row_cent1+N_pad+1), int(col_cent1-N_pad): int(col_cent1+N_pad+1) ]
                     
                     if (np.sum([img_temp ==200] ) == 0)&(np.sum([img_temp > 1] ) >= 0.2*N_pixel):
                         for slice_id2 in search_list:
@@ -157,7 +157,7 @@ for sam_id in range(1,1+testB_MATCH.SAM_ID.max()):
                     if ((T_id>=1)&(T_id<=15)):                  
                         data_mat,row,col = read_slice(testB_input_file,testB_slice_size,slice_id,T_id,H_id)
                         useful_place = np.where(data_mat!=200)
-                        view_all[ROW_SHIFT_B+ useful_place[0] + row_id,COL_SHIFT_B +  useful_place[1] + col_id] = data_mat[useful_place]
+                        view_all[int(ROW_SHIFT_B+ useful_place[0] + row_id),int(COL_SHIFT_B +  useful_place[1] + col_id)] = data_mat[useful_place]
                 if TH_ind ==0:  
                     sample_stat.append((SAMSA.SAM_ID.values[0], SAMSB.SAM_ID.values[0], ROW_SIZE,COL_SIZE,TIME_MAX,size_all,ROW_SHIFT_A,COL_SHIFT_A,ROW_SHIFT_B,COL_SHIFT_B))
                     size_all = size_all + 4*TIME_MAX*ROW_SIZE*COL_SIZE
@@ -170,10 +170,10 @@ for sam_id in range(1,1+testB_MATCH.SAM_ID.max()):
                     if ((T_id>=1)&(T_id<=15)):                  
                         data_mat,row,col = read_slice(testA_input_file,testA_slice_size,slice_id,T_id,H_id)
                         useful_place = np.where(data_mat!=200)
-                        view_all[ROW_SHIFT_A + useful_place[0] + row_id,COL_SHIFT_A +  useful_place[1] + col_id] = data_mat[useful_place]
+                        view_all[int(ROW_SHIFT_A + useful_place[0] + row_id),int(COL_SHIFT_A +  useful_place[1] + col_id)] = data_mat[useful_place]
 
 
-                f = open(output_file, "a")
+                f = open(output_file, "ab")
                 f.write(view_all.tobytes())  
                 f.close()  
     else:
@@ -183,7 +183,7 @@ for sam_id in range(1,1+testB_MATCH.SAM_ID.max()):
         for t_id in range(1,1 + TIME_MAX):
             for H_id in range(1,5):
                 TH_ind = (t_id-1)*4 + (H_id - 1)      
-                view_all = (200*np.ones([ROW_SIZE, COL_SIZE])).astype(np.ubyte)  
+                view_all = (200*np.ones([int(ROW_SIZE), int(COL_SIZE)])).astype(np.ubyte)
                 
                 for ind,value in SAMSB.iterrows():
                     sam_id = value.SAM_ID
@@ -195,11 +195,11 @@ for sam_id in range(1,1+testB_MATCH.SAM_ID.max()):
                     if ((T_id>=1)&(T_id<=15)):                  
                         data_mat,row,col = read_slice(testB_input_file,testB_slice_size,slice_id,T_id,H_id)
                         useful_place = np.where(data_mat!=200)
-                        view_all[ useful_place[0] + row_id, useful_place[1] + col_id] = data_mat[useful_place] 
+                        view_all[ int(useful_place[0] + row_id), int(useful_place[1] + col_id)] = data_mat[useful_place]
                 if TH_ind ==0:  
                     sample_stat.append((0, SAMSB.SAM_ID.values[0], ROW_SIZE,COL_SIZE,TIME_MAX,size_all,0,0,0,0))
                     size_all = size_all + 4*TIME_MAX*ROW_SIZE*COL_SIZE                        
-                f = open(output_file, "a")
+                f = open(output_file, "ab")
                 f.write(view_all.tobytes())  
                 f.close()  
 sample_stat_pd = pd.DataFrame( sample_stat, columns = ['testA_SAM_ID','testB_SAM_ID','N_row','N_col','N_time','start_pos','testA_ROW_SHIFT','testA_COL_SHIFT','testB_ROW_SHIFT','testB_COL_SHIFT'])

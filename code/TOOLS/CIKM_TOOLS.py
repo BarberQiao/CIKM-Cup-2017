@@ -34,6 +34,7 @@ import time
 import pandas as pd
 import numpy as np
 import multiprocessing
+import networkx as nx
 
 def read_data(input_file,pic_ind,T_ind,H_ind):
 
