@@ -6,9 +6,10 @@ Temporal template matching of sub-images
 """
 
 import sys
-from os import getcwd
-from os import path
-sys.path.append(path.split(getcwd())[0])
+if len(sys.argv) > 1:
+    sys.path.append(sys.argv[1])
+else:
+    sys.path.append(r"D:\Qiao\github\CIKM-Cup-2017\code")
 from TOOLS.CIKM_TOOLS import *
 
 def multi_thread_method(set_name,N_slice):
