@@ -34,7 +34,7 @@ for set_name in set_name_list:
     std_ = list(map(lambda x:'STD'+ str(x).zfill(2), time_list))
     max_ = list(map(lambda x:'MAX'+ str(x).zfill(2), time_list))
 
-    item_zip = zip(time_list,cover_, mean_,std_,max_)
+    item_zip =list( zip(time_list,cover_, mean_,std_,max_))
     for ind,value in SAM_INFO.iterrows():  
         for t_id,cover_item,mean_item,std_item,max_item in item_zip:   
             if set_name =='train':
@@ -57,7 +57,7 @@ for set_name in set_name_list:
     std_diff_ = list(map(lambda x:'STD_DIFF'+ str(x).zfill(2), time_diff_list) )
     max_diff_ = list(map(lambda x:'MAX_DIFF'+ str(x).zfill(2), time_diff_list)  )
     
-    item_zip = zip(time_diff_list,cover_diff_,mean_diff_,std_diff_,max_diff_)
+    item_zip = list(zip(time_diff_list,cover_diff_,mean_diff_,std_diff_,max_diff_))
     for t_id, cover_item, mean_item,std_item,max_item in item_zip:
         pic_sample[cover_item] = 1.0*pic_sample[cover_[t_id]] - pic_sample[cover_[t_id-1]]
         pic_sample[mean_item] = 1.0*pic_sample[mean_[t_id]] - pic_sample[mean_[t_id-1]]
@@ -71,7 +71,7 @@ for set_name in set_name_list:
     std_diff_H = list(map(lambda x:'STD_DIFF_H'+ str(x).zfill(2), height_diff_list) )
     max_diff_H = list(map(lambda x:'MAX_DIFF_H'+ str(x).zfill(2), height_diff_list)  )
     
-    item_zip = zip(height_diff_list, cover_diff_H,mean_diff_H ,std_diff_H ,max_diff_H)
+    item_zip = list(zip(height_diff_list, cover_diff_H,mean_diff_H ,std_diff_H ,max_diff_H))
     SAM_INFO = pic_sample[['SAM_ID','TIM_ID','PIC_IND']].groupby(['SAM_ID','TIM_ID'],as_index = False).count()
     SAM_INFO = SAM_INFO.rename(columns = {'PIC_IND':'N_sli'})     
 

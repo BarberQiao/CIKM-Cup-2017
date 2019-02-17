@@ -205,7 +205,7 @@ for set_name in set_name_list:
     Dist_list = (np.e-1)**np.arange(1,N_dist)
     N_ = list(map(lambda x:'N'+ str(x).zfill(2), np.arange(1,N_dist )) )
 #    NP_ = map(lambda x:'NP'+ str(x).zfill(2), np.arange(1,N_num )) 
-    dist_zip = zip(Dist_list,N_)
+    dist_zip = list(zip(Dist_list,N_))
     for ind,value in SAM_INFO.iterrows():
         sli_info = pic_sample_temp[(pic_sample_temp.SAM_ID == value.SAM_ID)&(pic_sample_temp.TIM_ID == value.TIM_ID)]
         for ind2,value2 in sli_info.iterrows():
