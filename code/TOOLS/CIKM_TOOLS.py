@@ -20,7 +20,7 @@ import libs and commonly used functions
 # opencv 3.2.0
 # scikit-learn 0.19.0
 # networkx 1.11
-# pandas 0.20.3
+# pandas 0.20.3 (should be)
 # conda install tensorflow==1.2.1
 
 data_folder = r"C:\Users\qiaos\Desktop\CIKM 2017\\"
@@ -299,7 +299,7 @@ def lr_model(train_pic_sample,feature_list):
     print('train mse:' + str(np.std(y_true - y_pred) ) )
 
 def variable_info(object):
-    if type(object)==np.ndarray:
+    if type(object)==np.ndarray or type(object)==pd.core.frame.DataFrame:
         print(type(object),object.shape)
     elif type(object)==tuple or type(object)==list:
         print(type(object),len(object))
@@ -317,14 +317,19 @@ if __name__=="__main__":
     T_id_count = 15
 
     input_file = r"C:\Users\qiaos\Desktop\CIKM 2017\step1_1_output\testA_ubyte.txt"
-    for T_id in range(0,T_id_count):
-        for H_id in range(0,H_id_count):
-            data = read_data(input_file, 2000, T_id+1, H_id+1)
+    for T_id in range(0, T_id_count):
+
+        for H_id in range(0, H_id_count):
+            data = read_data(input_file, 2000, T_id + 1, H_id + 1)
             print()
-            pyplot.subplot(15, 4, 1+ T_id*4 + H_id)
+            pyplot.subplot(15, 4, 1 + T_id * 4 + H_id)
             pyplot.imshow(data)
             ax = pyplot.gca()
             ax.get_xaxis().set_visible(False)
             ax.get_yaxis().set_visible(False)
+
     pyplot.show()
+
+
+
 
