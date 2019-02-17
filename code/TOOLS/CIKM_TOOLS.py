@@ -48,6 +48,7 @@ from itertools import islice
 import math
 from sklearn.cluster import KMeans
 from sklearn.metrics.pairwise import pairwise_distances_argmin
+import tensorflow as tf
 
 def read_data(input_file,pic_ind,T_ind,H_ind):
 
