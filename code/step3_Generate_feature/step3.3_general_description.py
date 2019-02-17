@@ -196,7 +196,7 @@ for set_name in set_name_list:
         pic_sample_B = pd.read_csv(data_folder + set_name+ 'B_pic_sample.csv')
         pic_sample_A['SET'] = 'A'
         pic_sample_B['SET'] = 'B'
-        pic_sample_temp = pd.concat([pic_sample_A,pic_sample_B])
+        pic_sample_temp = pd.concat([pic_sample_A,pic_sample_B],sort = False)
         
     #%%
     SAM_INFO = pic_sample_temp[['SAM_ID','TIM_ID','PIC_IND']].groupby(['SAM_ID','TIM_ID'],as_index = False).count()
