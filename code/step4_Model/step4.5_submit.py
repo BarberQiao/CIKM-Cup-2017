@@ -6,7 +6,9 @@ Model ensemble and submit
 """
 
 import sys
-sys.path.append(r"D:\Qiao\github\CIKM-Cup-2017\code")
+from os import getcwd
+from os import path
+sys.path.append(path.split(getcwd())[0])
 from TOOLS.CIKM_TOOLS import *
 
 cnn = pd.read_csv(data_folder + 'result_cnn.csv')

@@ -6,7 +6,9 @@ Generate temporal and altitudinal vector
 """
 
 import sys
-sys.path.append(r"D:\Qiao\github\CIKM-Cup-2017\code")
+from os import getcwd
+from os import path
+sys.path.append(path.split(getcwd())[0])
 from TOOLS.CIKM_TOOLS import *
 
 set_name_list = ['train','testAB']
