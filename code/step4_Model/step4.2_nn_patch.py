@@ -6,7 +6,7 @@ Neural net training for samples without tracked local image
 """
 
 import sys
-sys.path.append("..")
+sys.path.append(r"D:\Qiao\github\CIKM-Cup-2017\code")
 from TOOLS.CIKM_TOOLS import *
 
     

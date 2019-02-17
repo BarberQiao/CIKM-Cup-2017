@@ -6,7 +6,7 @@ Convolutional neural network training
 """
 
 import sys
-sys.path.append("..")
+sys.path.append(r"D:\Qiao\github\CIKM-Cup-2017\code")
 from TOOLS.CIKM_TOOLS import *
 
 import tensorflow as tf

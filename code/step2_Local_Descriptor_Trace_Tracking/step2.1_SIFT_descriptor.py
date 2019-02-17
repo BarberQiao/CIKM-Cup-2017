@@ -6,9 +6,9 @@ Calculate the histogram of SIFT descriptors
 """
 
 import sys
-sys.path.append("..")
+import os
+sys.path.append(r"D:\Qiao\github\CIKM-Cup-2017\code")
 from TOOLS.CIKM_TOOLS import *
-
 
 set_name_list = ['train','testAB']
 fast = cv2.FastFeatureDetector_create()
