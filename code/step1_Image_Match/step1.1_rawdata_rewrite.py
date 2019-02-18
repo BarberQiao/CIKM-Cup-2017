@@ -46,8 +46,6 @@ def write_file_multi_thread(input_file,set_name,output_file):
 
 if __name__=="__main__":
 
-    os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-    data_folder = r"C:\Users\qiaos\Desktop\CIKM 2017\\"
     set_list = ['train', 'testA', 'testB']
     size_list = [10000, 2000, 2000]
     time1 = time.time()
