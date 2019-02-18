@@ -253,7 +253,6 @@ L_img = 101  # size of image
 N_pad = 3  # Pad size of matching template
 N_block = 5  # number of blocks along each side of image
 N_cor = N_block ** 2
-data_folder = r"C:\Users\qiaos\Desktop\CIKM 2017\\"
 
 block_ele = np.asarray(
         [N_pad, (L_img - N_pad) / 4, (L_img - N_pad) / 2, (L_img - N_pad) * 3 / 4, (L_img - N_pad - 1)])
