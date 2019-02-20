@@ -314,23 +314,47 @@ def check_file_exist(file_path):
         return False
 
 if __name__=="__main__":
-    H_id_count = 4
-    T_id_count = 15
+    # H_id_count = 4
+    # T_id_count = 15
+    #
+    # input_file = r"C:\Users\qiaos\Desktop\CIKM 2017\step1_1_output\testA_ubyte.txt"
+    # for T_id in range(0, T_id_count):
+    #
+    #     for H_id in range(0, H_id_count):
+    #         data = read_data(input_file, 2000, T_id + 1, H_id + 1)
+    #         print()
+    #         pyplot.subplot(15, 4, 1 + T_id * 4 + H_id)
+    #         pyplot.imshow(data)
+    #         ax = pyplot.gca()
+    #         ax.get_xaxis().set_visible(False)
+    #         ax.get_yaxis().set_visible(False)
+    #
+    # pyplot.show()
 
-    input_file = r"C:\Users\qiaos\Desktop\CIKM 2017\step1_1_output\testA_ubyte.txt"
-    for T_id in range(0, T_id_count):
-
-        for H_id in range(0, H_id_count):
-            data = read_data(input_file, 2000, T_id + 1, H_id + 1)
-            print()
-            pyplot.subplot(15, 4, 1 + T_id * 4 + H_id)
-            pyplot.imshow(data)
-            ax = pyplot.gca()
-            ax.get_xaxis().set_visible(False)
-            ax.get_yaxis().set_visible(False)
-
+    path = r"C:\Users\qiaos\Desktop\CIKM 2017\step1_1_output\testA_ubyte.txt"
+    data = read_data(path, 1, 2, 3)
+    image_corner=data[46:53,46:53]
+    data2=read_data(path,2,2,3)
+    result = cv2_based(data2,image_corner) #101*101  7*7
+    image_corner2=data2[int(result[0][0]):int(result[0][0]+7),int(result[1][0]):int(result[1][0]+7)]
+    pyplot.subplot(2, 2, 1)
+    pyplot.imshow(data)
+    pyplot.subplot(2, 2, 2)
+    pyplot.imshow(image_corner)
+    pyplot.subplot(2, 2, 3)
+    pyplot.imshow(data2)
+    pyplot.subplot(2, 2, 4)
+    pyplot.imshow(image_corner2)
     pyplot.show()
 
+    path = r"C:\Users\qiaos\Desktop\CIKM 2017\train.txt"
+    a = open(path)
+    for res in a:
+        detail = res.split(",")
+        data = np.asarray(detail[2].split(' '))
+        data_byte = data.astype(np.ubyte)
+        print(len(data_byte),data_byte.shape)
+        break
 
 
 

@@ -52,10 +52,10 @@ def multi_thread_1(set_name,N_pic):
                                              int(col_cent1 - N_TOP): int(col_cent1 + N_BOT + 1)]
                                 IMG_CHECK2 = data_mat2[int(row_cent2 - N_LEF): int(row_cent2 + N_RIG + 1),
                                              int(col_cent2 - N_TOP): int(col_cent2 + N_BOT + 1)]
-                                if np.array_equal(IMG_CHECK1, IMG_CHECK2):
-                                    check_row_N = IMG_CHECK1.shape[0]
-                                    check_col_N = IMG_CHECK1.shape[1]
-                                    if (check_col_N * check_row_N >= 25):
+                                check_row_N = IMG_CHECK1.shape[0]
+                                check_col_N = IMG_CHECK1.shape[1]
+                                if (check_col_N * check_row_N >= 25):
+                                    if np.array_equal(IMG_CHECK1, IMG_CHECK2):
                                         match_all.append((pic_id1, row_cent1, col_cent1, pic_id2, row_cent2, col_cent2))
                                         search_list.remove(pic_id2)
                     else:
