@@ -23,7 +23,7 @@ def multi_thread_1(set_name,N_pic):
             for H_id in range(2, 5):
                 FAIL_CORNER = 0
                 data_mat1 = read_data(input_file, pic_id1, T_id, H_id)
-                search_list = list(range(max(pic_id1 - 10, 1), pic_id1)) + list(
+                search_pic_ind_list = list(range(max(pic_id1 - 10, 1), pic_id1)) + list(
                     range(pic_id1 + 1, min(pic_id1 + 16, N_pic + 1)))
 
                 for cor_ind in range(0, N_cor):
@@ -37,7 +37,7 @@ def multi_thread_1(set_name,N_pic):
                     img_corner = data_mat1[a1:b1, a2:b2]
                     if ((len(np.unique(img_corner))) > 2) & (np.sum(img_corner == 1) < 0.8 * (N_pad * 2 + 1) ** 2):
 
-                        for pic_id2 in search_list:
+                        for pic_id2 in search_pic_ind_list:
 
                             data_mat2 = read_data(input_file, pic_id2, T_id, H_id)
                             match_result = cv2_based(data_mat2, img_corner)
@@ -57,7 +57,7 @@ def multi_thread_1(set_name,N_pic):
                                 if (check_col_N * check_row_N >= 25):
                                     if np.array_equal(IMG_CHECK1, IMG_CHECK2):
                                         match_all.append((pic_id1, row_cent1, col_cent1, pic_id2, row_cent2, col_cent2))
-                                        search_list.remove(pic_id2)
+                                        search_pic_ind_list.remove(pic_id2)
                     else:
                         FAIL_CORNER = FAIL_CORNER + 1
 
@@ -93,14 +93,6 @@ def multi_thread_1(set_name,N_pic):
 
     match_all_pd['row_diff'] = match_all_pd['row_id2'] - match_all_pd['row_id1']
     match_all_pd['col_diff'] = match_all_pd['col_id2'] - match_all_pd['col_id1']
-    match_all_pd = match_all_pd.sort_values(by=['pic_id1', 'pic_id2'])
-    match_all_pd = match_all_pd.drop_duplicates(subset=['pic_id1', 'pic_id2', 'row_diff', 'col_diff'], keep='first')
-
-    match_check = match_all_pd.groupby(by=['pic_id1', 'pic_id2', 'row_diff', 'col_diff']).count()
-    if (len(match_check[match_check.col_id1 > 1]) > 0):
-        print('error')
-
-    # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     match_all_pd = match_all_pd.sort_values(by=['pic_id1', 'pic_id2'], ascending=[1, 1])
     match_all_pd = match_all_pd.drop_duplicates(subset=['pic_id1', 'pic_id2', 'row_diff', 'col_diff'], keep='first')

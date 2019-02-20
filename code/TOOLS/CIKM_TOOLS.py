@@ -314,23 +314,9 @@ def check_file_exist(file_path):
         return False
 
 if __name__=="__main__":
-    # H_id_count = 4
-    # T_id_count = 15
-    #
-    # input_file = r"C:\Users\qiaos\Desktop\CIKM 2017\step1_1_output\testA_ubyte.txt"
-    # for T_id in range(0, T_id_count):
-    #
-    #     for H_id in range(0, H_id_count):
-    #         data = read_data(input_file, 2000, T_id + 1, H_id + 1)
-    #         print()
-    #         pyplot.subplot(15, 4, 1 + T_id * 4 + H_id)
-    #         pyplot.imshow(data)
-    #         ax = pyplot.gca()
-    #         ax.get_xaxis().set_visible(False)
-    #         ax.get_yaxis().set_visible(False)
-    #
-    # pyplot.show()
 
+    a=pd.DataFrame(np.arange(0,10),columns="1")
+    print(a)
     path = r"C:\Users\qiaos\Desktop\CIKM 2017\step1_1_output\testA_ubyte.txt"
     data = read_data(path, 1, 2, 3)
     image_corner=data[46:53,46:53]
@@ -345,6 +331,20 @@ if __name__=="__main__":
     pyplot.imshow(data2)
     pyplot.subplot(2, 2, 4)
     pyplot.imshow(image_corner2)
+    pyplot.show()
+    H_id_count = 4
+    T_id_count = 15
+    for T_id in range(0, T_id_count):
+
+        for H_id in range(0, H_id_count):
+            data = read_data(path, 2000, T_id + 1, H_id + 1)
+            print()
+            pyplot.subplot(15, 4, 1 + T_id * 4 + H_id)
+            pyplot.imshow(data)
+            ax = pyplot.gca()
+            ax.get_xaxis().set_visible(False)
+            ax.get_yaxis().set_visible(False)
+
     pyplot.show()
 
     path = r"C:\Users\qiaos\Desktop\CIKM 2017\train.txt"
