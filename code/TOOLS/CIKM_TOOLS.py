@@ -299,13 +299,15 @@ def lr_model(train_pic_sample,feature_list):
     print('train mean pred:' + str(np.mean(y_pred)) )
     print('train mse:' + str(np.std(y_true - y_pred) ) )
 
-def variable_info(object):
+def info(object):
     if type(object)==np.ndarray or type(object)==pd.core.frame.DataFrame:
-        print(type(object),object.shape)
+        print(type(object),object.shape,object)
     elif type(object)==tuple or type(object)==list:
-        print(type(object),len(object))
+        print(type(object),len(object),object)
+    elif type(object)==nx.classes.graph.Graph:
+        print(type(object),object.edges(data=True),object.nodes(data=True))
     else:
-        print(type(object))
+        print(type(object),object)
 
 def check_file_exist(file_path):
     if os.path.exists(file_path):
@@ -315,14 +317,12 @@ def check_file_exist(file_path):
 
 if __name__=="__main__":
 
-    a=pd.DataFrame(np.arange(0,10),columns="1")
-    print(a)
+
     path = r"C:\Users\qiaos\Desktop\CIKM 2017\step1_1_output\testA_ubyte.txt"
-    data = read_data(path, 1, 2, 3)
+    data = read_data(path, 1, 14, 2)
     image_corner=data[46:53,46:53]
-    data2=read_data(path,2,2,3)
-    result = cv2_based(data2,image_corner) #101*101  7*7
-    image_corner2=data2[int(result[0][0]):int(result[0][0]+7),int(result[1][0]):int(result[1][0]+7)]
+    data2=read_data(path,4,14,2)
+    image_corner2=data2[86:93,33:40]
     pyplot.subplot(2, 2, 1)
     pyplot.imshow(data)
     pyplot.subplot(2, 2, 2)
@@ -332,12 +332,12 @@ if __name__=="__main__":
     pyplot.subplot(2, 2, 4)
     pyplot.imshow(image_corner2)
     pyplot.show()
+
     H_id_count = 4
     T_id_count = 15
     for T_id in range(0, T_id_count):
-
         for H_id in range(0, H_id_count):
-            data = read_data(path, 2000, T_id + 1, H_id + 1)
+            data = read_data(path, 4, T_id + 1, H_id + 1)
             print()
             pyplot.subplot(15, 4, 1 + T_id * 4 + H_id)
             pyplot.imshow(data)
