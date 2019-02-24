@@ -316,7 +316,34 @@ def check_file_exist(file_path):
         return False
 
 if __name__=="__main__":
+    csv_file = pd.read_csv(r"C:\Users\qiaos\Desktop\CIKM 2017\step1_2_output\train_slice_size.csv")
+    data = read_slice(r"C:\Users\qiaos\Desktop\CIKM 2017\step1_2_output\train_slice_data", csv_file, 451, 9, 1)
+    pyplot.subplot(2, 2, 1)
+    pyplot.imshow(data[0])
+    ax = pyplot.gca()
+    ax.get_xaxis().set_visible(False)
+    ax.get_yaxis().set_visible(False)
 
+    pyplot.subplot(2,2,2)
+    pyplot.imshow(data[0][int(39 - 4): int(39 + 4 + 1),int(27 - 4): int(27 + 4 + 1)])
+    ax = pyplot.gca()
+    ax.get_xaxis().set_visible(False)
+    ax.get_yaxis().set_visible(False)
+
+    data1 = read_slice(r"C:\Users\qiaos\Desktop\CIKM 2017\step1_2_output\train_slice_data", csv_file, 452, 4, 1)
+    pyplot.subplot(2, 2, 3)
+    pyplot.imshow(data1[0])
+    ax = pyplot.gca()
+    ax.get_xaxis().set_visible(False)
+    ax.get_yaxis().set_visible(False)
+
+    pyplot.subplot(2, 2, 4)
+    pyplot.imshow(data1[0][int(84 - 4): int(84 + 4 + 1), int(44 - 4): int(44 + 4 + 1)])
+    ax = pyplot.gca()
+    ax.get_xaxis().set_visible(False)
+    ax.get_yaxis().set_visible(False)
+
+    pyplot.show()
 
     path = r"C:\Users\qiaos\Desktop\CIKM 2017\step1_1_output\testA_ubyte.txt"
     data = read_data(path, 1, 14, 2)
