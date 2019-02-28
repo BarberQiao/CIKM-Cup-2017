@@ -248,7 +248,7 @@ def multi_thread_method(set_name,N_slice):
                 f.close()
                 #
 
-    sample_stat_pd = pd.DataFrame(sample_stat, columns=['sample_id', 'N_row', 'N_col', ' N_time', 'start_pos'])
+    sample_stat_pd = pd.DataFrame(sample_stat, columns=['sample_id', 'N_row', 'N_col', 'N_time', 'start_pos'])
     sample_stat_pd.to_csv(data_folder + set_name + '_sample_size.csv', index=False)
 
 N_pad = 4
