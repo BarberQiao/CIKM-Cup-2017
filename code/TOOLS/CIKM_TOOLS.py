@@ -23,8 +23,6 @@ import libs and commonly used functions
 # pandas 0.20.3 (should be)
 # conda install tensorflow==1.2.1
 
-data_folder = r"C:\Users\qiaos\Desktop\CIKM 2017\\"
-
 import numpy as np
 import os
 import cv2
@@ -82,6 +80,7 @@ def read_sample(input_file,input_size, sample_ind,T_ind,H_ind):
     f.close()
     data_mat = data.reshape(row,col)
     return data_mat
+
 
 def read_sample_trn(input_file,input_size,sample_ind,T_ind,H_ind):
     _,row,col,time,pos = input_size[input_size.sample_id == sample_ind].values[0]
@@ -308,6 +307,7 @@ def info(object):
         print(type(object),object.edges(data=True),object.nodes(data=True))
     else:
         print(type(object),object)
+    exit(1)
 
 def check_file_exist(file_path):
     if os.path.exists(file_path):
@@ -315,73 +315,138 @@ def check_file_exist(file_path):
     else:
         return False
 
+data_folder = r"D:\cikm\\"
+
 if __name__=="__main__":
-    csv_file = pd.read_csv(r"C:\Users\qiaos\Desktop\CIKM 2017\step1_2_output\train_slice_size.csv")
-    data = read_slice(r"C:\Users\qiaos\Desktop\CIKM 2017\step1_2_output\train_slice_data", csv_file, 451, 9, 1)
-    pyplot.subplot(2, 2, 1)
-    pyplot.imshow(data[0])
-    ax = pyplot.gca()
-    ax.get_xaxis().set_visible(False)
-    ax.get_yaxis().set_visible(False)
 
-    pyplot.subplot(2,2,2)
-    pyplot.imshow(data[0][int(39 - 4): int(39 + 4 + 1),int(27 - 4): int(27 + 4 + 1)])
-    ax = pyplot.gca()
-    ax.get_xaxis().set_visible(False)
-    ax.get_yaxis().set_visible(False)
+    #SIFT description
+    # input_file = data_folder + 'train_sample_data'
+    # input_size = pd.read_csv(data_folder + 'train_sample_size.csv')
+    # pic_sample = pd.read_csv(data_folder + 'train_pic_sample.csv')
+    # sample_ind = 2
+    # H_ind = 3
+    # T_ind = 1
+    # data = read_sample_trn(input_file, input_size, sample_ind, T_ind + 1, H_ind + 1)
+    # import cv2
+    # fast = cv2.FastFeatureDetector_create()
+    # sift = cv2.xfeatures2d.SIFT_create()
+    # kp = fast.detect(data, None)
+    # kp, des = sift.compute(data, kp)
+    # img = cv2.drawKeypoints(data, kp, data, flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+    # cv2.imwrite(data_folder + 'SIFT description.jpg', img)
+    # cv2.imshow('sift_keypoints', img)
+    # cv2.waitKey(0)
+    # exit(1)
+    # image matching
+    # input_file = data_folder + 'train_sample_data'
+    # input_size = pd.read_csv(data_folder + 'train_sample_size.csv')
+    # pic_sample = pd.read_csv(data_folder + 'train_pic_sample.csv')
+    # sample_ind = 2
+    # H_id_count = 4
+    # pic_sample = dict(pic_sample[pic_sample.SAM_ID == sample_ind].head(1).TIM_MAX)
+    # for res in pic_sample:
+    #     T_id_count = pic_sample[res]
+    # for T_id in range(0, T_id_count):
+    #     for H_id in range(0, H_id_count):
+    #         data = read_sample_trn(input_file, input_size, sample_ind,T_id + 1,H_id + 1)
+    #         pyplot.subplot(T_id_count, H_id_count, 1 + T_id * 4 + H_id)
+    #         pyplot.imshow(data)
+    #         ax = pyplot.gca()
+    #         ax.get_xaxis().set_visible(False)
+    #         ax.get_yaxis().set_visible(False)
+    # pyplot.show()
+    # exit(1)
 
-    data1 = read_slice(r"C:\Users\qiaos\Desktop\CIKM 2017\step1_2_output\train_slice_data", csv_file, 452, 4, 1)
-    pyplot.subplot(2, 2, 3)
-    pyplot.imshow(data1[0])
-    ax = pyplot.gca()
-    ax.get_xaxis().set_visible(False)
-    ax.get_yaxis().set_visible(False)
+    # T_id_count = 15
+    # H_id_count = 4
+    # slice_size = pd.read_csv(data_folder + 'train_slice_size.csv')
+    # input_file = data_folder + 'train_slice_data'
+    # for T_id in range(0, T_id_count):
+    #     for H_id in range(0, H_id_count):
+    #         data, N_row, N_col = read_slice(input_file, slice_size, 400, T_id + 1, H_id + 1)
+    #         pyplot.subplot(T_id_count, H_id_count, 1 + T_id * 4 + H_id)
+    #         pyplot.imshow(data)
+    #         ax = pyplot.gca()
+    #         ax.get_xaxis().set_visible(False)
+    #         ax.get_yaxis().set_visible(False)
+    # pyplot.show()
+    # exit(1)
 
-    pyplot.subplot(2, 2, 4)
-    pyplot.imshow(data1[0][int(84 - 4): int(84 + 4 + 1), int(44 - 4): int(44 + 4 + 1)])
-    ax = pyplot.gca()
-    ax.get_xaxis().set_visible(False)
-    ax.get_yaxis().set_visible(False)
+    # image matching
+    # slice_size = pd.read_csv(data_folder + 'train_slice_size.csv')
+    # input_file = data_folder + 'train_slice_data'
+    # H_id_count = 4
+    # T_id_count = 15
+    # for T_id in range(0, T_id_count):
+    #     for H_id in range(0, H_id_count):
+    #         data, N_row, N_col = read_slice(input_file, slice_size, 400, T_id + 1, H_id + 1)
+    #         pyplot.subplot(15, 4, 1 + T_id * 4 + H_id)
+    #         pyplot.imshow(data)
+    #         ax = pyplot.gca()
+    #         ax.get_xaxis().set_visible(False)
+    #         ax.get_yaxis().set_visible(False)
+    # pyplot.show()
+    # exit(1)
 
-    pyplot.show()
-
-    path = r"C:\Users\qiaos\Desktop\CIKM 2017\step1_1_output\testA_ubyte.txt"
-    data = read_data(path, 1, 14, 2)
-    image_corner=data[46:53,46:53]
-    data2=read_data(path,4,14,2)
-    image_corner2=data2[86:93,33:40]
-    pyplot.subplot(2, 2, 1)
-    pyplot.imshow(data)
-    pyplot.subplot(2, 2, 2)
-    pyplot.imshow(image_corner)
-    pyplot.subplot(2, 2, 3)
-    pyplot.imshow(data2)
-    pyplot.subplot(2, 2, 4)
-    pyplot.imshow(image_corner2)
-    pyplot.show()
-
+    # csv_file = pd.read_csv(data_folder + "train_slice_size.csv")
+    # data = read_slice(data_folder + "train_slice_data", csv_file, 451, 9, 1)
+    # pyplot.subplot(2, 2, 1)
+    # pyplot.imshow(data[0])
+    # ax = pyplot.gca()
+    # ax.get_xaxis().set_visible(False)
+    # ax.get_yaxis().set_visible(False)
+    #
+    # pyplot.subplot(2, 2, 2)
+    # pyplot.imshow(data[0][int(39 - 4): int(39 + 4 + 1), int(27 - 4): int(27 + 4 + 1)])
+    # ax = pyplot.gca()
+    # ax.get_xaxis().set_visible(False)
+    # ax.get_yaxis().set_visible(False)
+    #
+    # data1 = read_slice(data_folder + "train_slice_data", csv_file, 452, 4, 1)
+    # pyplot.subplot(2, 2, 3)
+    # pyplot.imshow(data1[0])
+    # ax = pyplot.gca()
+    # ax.get_xaxis().set_visible(False)
+    # ax.get_yaxis().set_visible(False)
+    #
+    # pyplot.subplot(2, 2, 4)
+    # pyplot.imshow(data1[0][int(84 - 4): int(84 + 4 + 1), int(44 - 4): int(44 + 4 + 1)])
+    # ax = pyplot.gca()
+    # ax.get_xaxis().set_visible(False)
+    # ax.get_yaxis().set_visible(False)
+    #
+    # pyplot.show()
+    # exit(1)
+    # #image matching
+    # path = data_folder + "testA_ubyte.txt"
+    # data = read_data(path, 1, 14, 2)
+    # image_corner = data[46:53, 46:53]
+    # data2 = read_data(path, 4, 14, 2)
+    # image_corner2 = data2[86:93, 33:40]
+    # pyplot.subplot(2, 2, 1)
+    # pyplot.imshow(data)
+    # pyplot.subplot(2, 2, 2)
+    # pyplot.imshow(image_corner)
+    # pyplot.subplot(2, 2, 3)
+    # pyplot.imshow(data2)
+    # pyplot.subplot(2, 2, 4)
+    # pyplot.imshow(image_corner2)
+    # pyplot.show()
+    #
+    # exit(1)
+    #raw data
+    path = data_folder + "testA_ubyte.txt"
     H_id_count = 4
     T_id_count = 15
     for T_id in range(0, T_id_count):
         for H_id in range(0, H_id_count):
             data = read_data(path, 4, T_id + 1, H_id + 1)
-            print()
             pyplot.subplot(15, 4, 1 + T_id * 4 + H_id)
             pyplot.imshow(data)
             ax = pyplot.gca()
             ax.get_xaxis().set_visible(False)
             ax.get_yaxis().set_visible(False)
-
     pyplot.show()
-
-    path = r"C:\Users\qiaos\Desktop\CIKM 2017\train.txt"
-    a = open(path)
-    for res in a:
-        detail = res.split(",")
-        data = np.asarray(detail[2].split(' '))
-        data_byte = data.astype(np.ubyte)
-        print(len(data_byte),data_byte.shape)
-        break
-
+    exit(1)
 
 
