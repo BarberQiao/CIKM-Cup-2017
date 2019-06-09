@@ -8,7 +8,7 @@ import sys
 if len(sys.argv) > 1:
     sys.path.append(sys.argv[1])
 else:
-    sys.path.append(r"D:\Qiao\github\CIKM-Cup-2017\code")
+    sys.path.append(r"/media/q/DATA/CIKM-Cup-2017/code/")
 from TOOLS.CIKM_TOOLS import *
 
 set_name_list = ['train','testAB']
@@ -50,7 +50,13 @@ for set_name  in set_name_list:
                 if set_name =='testAB':
                     mat_t1 = read_sample_AB(input_file, input_size,sample_ind,T_ind1,H_ind) 
                     mat_t2 = read_sample_AB(input_file, input_size,sample_ind,T_ind2,H_ind)             
-        
+            import yaml
+
+            with open("/media/q/DATA/kernal/sift/mat_t1", "w") as f:
+                yaml.dump(mat_t1, f)
+            with open("/media/q/DATA/kernal/sift/mat_t2", "w") as f:
+                yaml.dump(mat_t2, f)
+
             kp1 = fast.detect(mat_t1,None)            
             kp2 = fast.detect(mat_t2,None)
 

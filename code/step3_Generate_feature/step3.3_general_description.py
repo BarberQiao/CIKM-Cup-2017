@@ -9,7 +9,7 @@ import sys
 if len(sys.argv) > 1:
     sys.path.append(sys.argv[1])
 else:
-    sys.path.append(r"D:\Qiao\github\CIKM-Cup-2017\code")
+    sys.path.append(r"/media/q/DATA/CIKM-Cup-2017/code/")
 from TOOLS.CIKM_TOOLS import *
 
 set_name_list = ['train','testAB']

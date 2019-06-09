@@ -10,11 +10,12 @@ import sys
 if len(sys.argv) > 1:
     sys.path.append(sys.argv[1])
 else:
-    sys.path.append(r"D:\Qiao\github\CIKM-Cup-2017\code")
+    sys.path.append(r"/media/q/DATA/CIKM-Cup-2017/code/")
 
 from TOOLS.CIKM_TOOLS import *
 
 set_name_list = ['train','testAB']
+
 fast = cv2.FastFeatureDetector_create()
 sift = cv2.xfeatures2d.SIFT_create()
 orb = cv2.ORB_create()
@@ -28,6 +29,7 @@ set_name_list = ['train','testAB']
 
 des_stack = []
 
+exit(1)
 for set_name in set_name_list:
     input_file = data_folder + set_name +'_sample_data'
     input_size = pd.read_csv(data_folder  + set_name + '_sample_size.csv')

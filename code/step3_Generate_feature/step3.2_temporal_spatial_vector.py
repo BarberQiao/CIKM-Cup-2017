@@ -9,7 +9,7 @@ import sys
 if len(sys.argv) > 1:
     sys.path.append(sys.argv[1])
 else:
-    sys.path.append(r"D:\Qiao\github\CIKM-Cup-2017\code")
+    sys.path.append(r"/media/q/DATA/CIKM-Cup-2017/code/")
 from TOOLS.CIKM_TOOLS import *
 
 set_name_list = ['train','testAB']
@@ -17,7 +17,8 @@ set_name_list = ['train','testAB']
 for set_name in set_name_list:
     input_file = data_folder + set_name +'_sample_data'
     input_size = pd.read_csv(data_folder  + set_name + '_sample_size.csv')
-    trace_H2 = np.load(data_folder + set_name + '_trace_H2.npy').item()
+    print(data_folder + set_name + '_trace_H2.npy')
+    trace_H2 = np.load(data_folder + set_name + '_trace_H2.npy',allow_pickle = True).item()
     if (set_name =='train'):
         pic_sample = pd.read_csv(data_folder + set_name+ '_pic_sample.csv')
         train_label = pd.read_csv(data_folder  + 'train_label.csv',names= ['value'])
@@ -30,7 +31,9 @@ for set_name in set_name_list:
     #%% time diff
     
     SAM_INFO = pic_sample[['SAM_ID','TIM_ID','PIC_IND']].groupby(['SAM_ID','TIM_ID'],as_index = False).count()
-    SAM_INFO = SAM_INFO.rename(columns = {'PIC_IND':'N_sli'}) 
+    SAM_INFO = SAM_INFO.rename(columns = {'PIC_IND':'N_sli'})
+
+
     time_list = np.arange(11,16)
     cover_ = list(map(lambda x:'COV'+ str(x).zfill(2), time_list))
     mean_ = list(map(lambda x:'MEA'+ str(x).zfill(2), time_list))
@@ -38,12 +41,14 @@ for set_name in set_name_list:
     max_ = list(map(lambda x:'MAX'+ str(x).zfill(2), time_list))
 
     item_zip =list( zip(time_list,cover_, mean_,std_,max_))
+
     for ind,value in SAM_INFO.iterrows():  
         for t_id,cover_item,mean_item,std_item,max_item in item_zip:   
             if set_name =='train':
                 img = read_sample_trn(input_file, input_size,value.SAM_ID,value.TIM_ID+t_id,2)
             else:
                 img = read_sample_AB(input_file, input_size,value.SAM_ID,value.TIM_ID+t_id,2)                
+
             useful_img = img[img!=200]
             none0_img = useful_img[useful_img>5]
             SAM_INFO.loc[ind,cover_item] = 1.0*np.size(none0_img)/np.size(useful_img)
@@ -61,12 +66,13 @@ for set_name in set_name_list:
     max_diff_ = list(map(lambda x:'MAX_DIFF'+ str(x).zfill(2), time_diff_list)  )
     
     item_zip = list(zip(time_diff_list,cover_diff_,mean_diff_,std_diff_,max_diff_))
+
     for t_id, cover_item, mean_item,std_item,max_item in item_zip:
         pic_sample[cover_item] = 1.0*pic_sample[cover_[t_id]] - pic_sample[cover_[t_id-1]]
         pic_sample[mean_item] = 1.0*pic_sample[mean_[t_id]] - pic_sample[mean_[t_id-1]]
         pic_sample[std_item] = 1.0*pic_sample[std_[t_id]] - pic_sample[std_[t_id-1]]
         pic_sample[max_item] = 1.0*pic_sample[max_[t_id]] - pic_sample[max_[t_id-1]]
-    
+
     #%% height diff
     height_diff_list = np.asarray([3,4])
     cover_diff_H = list(map(lambda x:'COV_DIFF_H'+ str(x).zfill(2), height_diff_list) )
@@ -113,6 +119,7 @@ for set_name in set_name_list:
     std_diff_H =list( map(lambda x:'STD_DIFF_H'+ str(x).zfill(2), height_diff_list) )
     max_diff_H = list(map(lambda x:'MAX_DIFF_H'+ str(x).zfill(2), height_diff_list) )
     time_list = np.asarray([11,15])
+
     cover_ = list(map(lambda x:'COV'+ str(x).zfill(2), time_list) )
     mean_ = list(map(lambda x:'MEA'+ str(x).zfill(2), time_list) )
     std_ =list( map(lambda x:'STD'+ str(x).zfill(2), time_list) )
