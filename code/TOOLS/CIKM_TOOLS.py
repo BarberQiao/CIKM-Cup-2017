@@ -7,7 +7,7 @@ import libs and commonly used functions
 """
 # anaconda python2.7
 # pip install numpy==1.11.3
-# pip install opencv-python==3.1.0 (if python  3.6: pip install opencv-contrib-python==3.4.1.15)
+# pip install opencv-python==3.1.0.5 (if python  3.6: pip install opencv-contrib-python==3.4.1.15)
 # conda install tensorflow==1.2.1
 # conda install scikit-learn==0.18.1
 # pip install networkx==1.11
@@ -23,30 +23,19 @@ import libs and commonly used functions
 # pandas 0.20.3 (should be)
 # conda install tensorflow==1.2.1
 
-import numpy as np
 import os
 import cv2
 from cv2 import matchTemplate as cv2m
 from sklearn import linear_model
 from sklearn import preprocessing
 from matplotlib import pyplot
-import time
 import pandas as pd
 import numpy as np
-import multiprocessing
 import networkx as nx
-import random
 try:
     from sets import Set
 except:
     Set=set
-import matplotlib.animation as animation
-from PIL import Image
-from itertools import islice
-import math
-from sklearn.cluster import KMeans
-from sklearn.metrics.pairwise import pairwise_distances_argmin
-import tensorflow as tf
 
 def read_data(input_file,pic_ind,T_ind,H_ind):
 
@@ -315,7 +304,7 @@ def check_file_exist(file_path):
     else:
         return False
 
-data_folder = r"D:\cikm\\"
+data_folder = r"/media/q/DATA/cikm/"
 
 if __name__=="__main__":
 
